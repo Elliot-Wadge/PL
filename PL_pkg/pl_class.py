@@ -2,7 +2,8 @@
 # coding: utf-8
 
 # In[ ]:
-
+import numpy as np
+import matplotlib.pyplot as plt
 
 class PL_data():
     

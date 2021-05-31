@@ -7,7 +7,7 @@ setup(
     author='Elliot Wadge',
     author_email='ewadge@sfu.ca',
     # Needed to actually package something
-    packages=['pl_class'],
+    packages=['PL_pkg'],
     # Needed for dependencies
     install_requires=['numpy','matplotlib'],
     # *strongly* suggested for sharing

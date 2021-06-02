@@ -86,6 +86,7 @@ class PL_data():
                     data = value[ID]
                     plt.plot(data[0], data[1],*args, **kwargs)
                     leg.append(key + '-' + ID)
+        plt.legend(leg)
         plt.show()
         
         

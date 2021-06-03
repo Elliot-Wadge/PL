@@ -28,6 +28,14 @@ PL_data(flist, **kwargs)
                                              ID: name of file/ID
                                              
                                            data: the data associated with the sample and ID
+                                           
+          PL_data[sample]: returns a dictionary of all the data associated with sample, the keys being the unique ids
+          
+          PL_data[sample][ID]: returns the data associated with an ID
+          
+          len(PL_data): returns the number of samples currently in the dictionary
+          
+          
          
    
        

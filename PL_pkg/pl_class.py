@@ -70,7 +70,7 @@ class PL_data():
                 leg.append(key + '-' + sub_key)
                 
         plt.legend(leg)
-        plt.show()
+        
         
         
     #plots by id name
@@ -87,7 +87,7 @@ class PL_data():
                     plt.plot(data[0], data[1],*args, **kwargs)
                     leg.append(key + '-' + ID)
         plt.legend(leg)
-        plt.show()
+        
         
         
     #plots all of the samples                
@@ -101,7 +101,7 @@ class PL_data():
                 plt.plot(data[0],data[1],*args,**kwargs)
                 leg.append(keys[i] + '-' + sub_keys[j])
         plt.legend(leg)
-        plt.show()
+        
         
         
     #append a new sample to the dictionary

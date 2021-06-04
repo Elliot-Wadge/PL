@@ -5,7 +5,7 @@ PL_data(flist, **kwargs)
  
 **parameters**: 
 
-               flist: list of the paths pointing to the desired data
+               flist: list of the paths pointing to the desired data from the working directory
 
             **kwargs: the kwargs associated with the numpy.genfromtxt() function ex. 'skip_header'
             

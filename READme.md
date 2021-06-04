@@ -21,15 +21,21 @@ PL_data(flist, **kwargs)
 
                       PL_data.plot_all(*args,**kwargs): plots all of the data formated via the args and kwargs in matplotlib
 
-         PL_data.plot_sample([sample],*args, **kwargs): [sample]:list of sample names to be plotted ex. ['H1146', 'H1156']
+         PL_data.plot_sample([sample],*args, **kwargs): 
+                                                       
+                                                       [sample]:list of sample names to be plotted ex. ['H1146', 'H1156']
          
                                               *args and **kwargs: matplotlib.pyplot formattin
                                                          
-         PL_data.plot_id([IDs],*args,**kwargs): [IDs]: list of the IDs desired to be plotted
+         PL_data.plot_id([IDs],*args,**kwargs): 
+         
+                                                [IDs]: list of the IDs desired to be plotted
          
                                    *args and **kwargs: matplotlib.pyplot formatting
                                                  
-         PL_data.append(sample,ID,data): sample: name of sample
+         PL_data.append(sample,ID,data): 
+         
+                                         sample: name of sample
          
                                              ID: name of file/ID
                                              

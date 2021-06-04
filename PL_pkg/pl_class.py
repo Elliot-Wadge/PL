@@ -70,7 +70,8 @@ class PL_data():
                 leg.append(key + '-' + sub_key)
                 
         plt.legend(leg)
-        
+        print('updated')
+        return fig
         
         
     #plots by id name

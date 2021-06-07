@@ -19,7 +19,9 @@ PL_data(flist, **kwargs)
            
 **methods**: 
 
-                      PL_data.plot_all(*args,**kwargs): plots all of the data formated via the args and kwargs in matplotlib
+                      PL_data.plot_all(*args,**kwargs): 
+                      
+                                                   plots all of the data formated via the args and kwargs in matplotlib
 
          PL_data.plot_sample([sample],*args, **kwargs): 
                                                        
@@ -41,11 +43,17 @@ PL_data(flist, **kwargs)
                                              
                               data: the data associated with the sample and ID
                                            
-          PL_data[sample]: returns a dictionary of all the data associated with sample, the keys being the unique ids
+          PL_data[sample]: 
+                            
+                            returns a dictionary of all the data associated with sample, the keys being the unique ids
           
-          PL_data[sample][ID]: returns the data associated with an ID
+          PL_data[sample][ID]: 
           
-          len(PL_data): returns the number of samples currently in the dictionary
+                            returns the data associated with an ID
+          
+          len(PL_data): 
+                            
+                            returns the number of samples currently in the dictionary
           
           
          

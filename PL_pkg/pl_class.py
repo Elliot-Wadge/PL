@@ -116,18 +116,24 @@ class PL_data():
     
     #get a sample
     def __getitem__(self,key):
-        return self.dict[key]
+        if key in self.samples:
+            return self[key]
+        
+        values = self.dict.values()
+        for i,value in enumerate(values):
+            if key in value.keys():
+                return value[key]
     
     
     #get the length of the dictionary
     def __len__(self):
         return len(self.dict)
 
-    def __getattr__(self,name):
-        if name in self.samples:
-            return self[name]
+    def __getattr__(self,key):
+        if key in self.samples:
+            return self[key]
         
         values = self.dict.values()
         for i,value in enumerate(values):
-            if name in value.keys():
-                return value[name]
+            if key in value.keys():
+                return value[key]

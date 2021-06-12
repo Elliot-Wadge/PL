@@ -9,6 +9,7 @@ class PL_data():
     
     #takes a list of filenames like as above
     def __init__(self, filenames, **kwargs):
+        kwargs['unpack'] = True
         self.dict, self.samples, self.dates = self.make_dictionary(filenames,**kwargs)
         
         

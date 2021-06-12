@@ -123,3 +123,11 @@ class PL_data():
     def __len__(self):
         return len(self.dict)
 
+    def __getattr__(self,name):
+        if name in self.samples:
+            return self[name]
+        
+        values = self.dict.values()
+        for i,value in enumerate(values):
+            if name in value.keys():
+                return value[name]

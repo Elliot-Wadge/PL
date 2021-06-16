@@ -19,7 +19,7 @@ class PL_data():
         dictionary = {}#dictionary to for convienance
 
         for filename in filenames:
-            slash_index = filename.rindex('\\')
+            slash_index = filename.rindex('/')
             date_runs = filename[slash_index + 1:]
             
             #open the filename and read header

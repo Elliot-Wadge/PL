@@ -19,9 +19,20 @@ class PL_data():
         dictionary = {}#dictionary to for convienance
 
         for filename in filenames:
-            slash_index = filename.rindex('/')
-            date_runs = filename[slash_index + 1:]
+            try:
+                slash_index = filename.rindex('/')
+                date_runs = filename[slash_index + 1:]
             
+            except:
+                continue
+                
+            try:
+                slash_index = filename.rindex('\\')
+                date_runs = filename[slash_index + 1:]
+                
+            except:
+                slash_index = -1
+                
             #open the filename and read header
             f = open(filename, 'r')
             header = f.readline()

@@ -72,7 +72,6 @@ class PL_data():
     #plots any amount of samples by name
     def plot_sample(self,sample_names,*args, **kwargs):
         leg = []
-        fig = plt.figure(figsize = [14,8])
         for key in sample_names:
             ID_sub_dict = self.dict[key]
             for sub_key in ID_sub_dict.keys():
@@ -87,7 +86,6 @@ class PL_data():
     #plots by id name
     def plot_id(self,IDs,*args, **kwargs):
         leg = []
-        fig = plt.figure(figsize = [14,8])
         for ID in IDs:
             values = self.dict.values()
             keys = list(self.dict.keys())
@@ -104,7 +102,6 @@ class PL_data():
     #plots all of the samples                
     def plot_all(self,*args, **kwargs):
         leg = []
-        fig = plt.figure(figsize = [14,8])
         for i, dates in enumerate(self.dict.values()):
             keys = list(self.dict.keys())
             for j, data in enumerate(dates.values()):

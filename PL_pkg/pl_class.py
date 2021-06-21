@@ -70,7 +70,7 @@ class PL_data():
     
     
     #plots any amount of samples by name
-    def plot_sample(self,sample_names,*args,clear_leg = False, **kwargs):
+    def plot_sample(self,sample_names,*args,clear_leg = True, **kwargs):
         if clear_leg:
             leg = []
             
@@ -86,7 +86,7 @@ class PL_data():
         
         
     #plots by id name
-    def plot_id(self,IDs,*args,clear_leg = False, **kwargs):
+    def plot_id(self,IDs,*args,clear_leg = True, **kwargs):
         if clear_leg:
             self.leg = []    
         for ID in IDs:
@@ -103,7 +103,7 @@ class PL_data():
         
         
     #plots all of the samples                
-    def plot_all(self,*args,clear_leg, **kwargs):
+    def plot_all(self,*args,clear_leg = True, **kwargs):
         if clear_leg:
             self.leg = [] 
         for i, dates in enumerate(self.dict.values()):

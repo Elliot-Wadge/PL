@@ -11,7 +11,7 @@ class PL_data():
     def __init__(self, filenames, **kwargs):
         kwargs['unpack'] = True
         self.dict, self.samples, self.ids = self.make_dictionary(filenames,**kwargs)
-        
+        self.leg = []
         
     def make_dictionary(self,filenames, **kwargs):
         samples = []#store the individual sample names
@@ -71,21 +71,20 @@ class PL_data():
     
     #plots any amount of samples by name
     def plot_sample(self,sample_names,*args, **kwargs):
-        leg = []
         for key in sample_names:
             ID_sub_dict = self.dict[key]
             for sub_key in ID_sub_dict.keys():
                 data = ID_sub_dict[sub_key]
                 plt.plot(data[0], data[1],*args,**kwargs)
-                leg.append(key + '-' + sub_key)
+                self.leg.append(key + '-' + sub_key)
                 
-        plt.legend(leg)
+        plt.legend(self.leg)
         
         
         
     #plots by id name
     def plot_id(self,IDs,*args, **kwargs):
-        leg = []
+        
         for ID in IDs:
             values = self.dict.values()
             keys = list(self.dict.keys())
@@ -94,21 +93,20 @@ class PL_data():
                 if ID in value.keys():
                     data = value[ID]
                     plt.plot(data[0], data[1],*args, **kwargs)
-                    leg.append(key + '-' + ID)
-        plt.legend(leg)
+                    self.leg.append(key + '-' + ID)
+        plt.legend(self.leg)
         
         
         
     #plots all of the samples                
     def plot_all(self,*args, **kwargs):
-        leg = []
         for i, dates in enumerate(self.dict.values()):
             keys = list(self.dict.keys())
             for j, data in enumerate(dates.values()):
                 sub_keys = list(self.dict[keys[i]].keys())
                 plt.plot(data[0],data[1],*args,**kwargs)
-                leg.append(keys[i] + '-' + sub_keys[j])
-        plt.legend(leg)
+                self.leg.append(keys[i] + '-' + sub_keys[j])
+        plt.legend(self.leg)
         
         
         

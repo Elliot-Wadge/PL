@@ -13,7 +13,7 @@ PL_data(flist, **kwargs)
 
                PL_data.samples: returns the list of samples that is currently in the dictionary
 
-            PL_data.unique_ids: returns the list of filenames/unique_ids in the dictionary
+            PL_data.ids: returns the list of filenames/unique_ids in the dictionary
             
             PL_data.dictionary: returns the current dictionary
            

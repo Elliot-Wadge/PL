@@ -146,7 +146,7 @@ class PL_data():
         
         values = self.dict.values()
         for i,value in enumerate(values):
-            if key in value.keys():
+            if key in list(value.keys()):
                 return value[key]
             
           

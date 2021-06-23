@@ -128,7 +128,7 @@ class PL_data():
     #get a sample
     def __getitem__(self,key):
         if key in self.samples:
-            return self[key]
+            return self.dict[key]
         
         values = self.dict.values()
         for i,value in enumerate(values):

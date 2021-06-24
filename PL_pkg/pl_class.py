@@ -70,10 +70,13 @@ class PL_data():
     
     
     #plots any amount of samples by name
-    def plot_sample(self,sample_names,*args,clear_leg = True, line_cm = None, slc = slice(None),
-                    transform_x = lambda x: x, transform_y = lambda y: y, **kwargs):
+    def plot_sample(self,sample_names,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None),
+                    transform_x = lambda x: x, transform_y = lambda y: y, ax = None, **kwargs):
         if clear_leg:
             self.leg = []
+            
+        if ax is None:
+            ax = plt.gca()
         
         length = 0
         for key in sample_names:
@@ -92,19 +95,24 @@ class PL_data():
             for sub_key in ID_sub_dict.keys():
                 color = colors[color_i]
                 data = ID_sub_dict[sub_key]
-                plt.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),color = color,*args,**kwargs)
+                line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),color = color,*args,**kwargs)
                 self.leg.append(key + '-' + sub_key)
                 color_i += 1
-                
-        plt.legend(self.leg)
         
+        if show_leg:        
+            plt.legend(self.leg)
+            
+        return line
         
         
     #plots by id name
-    def plot_id(self,IDs,*args,clear_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x,
-                transform_y = lambda y: y, **kwargs):
+    def plot_id(self,IDs,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x,
+                transform_y = lambda y: y, ax = None, **kwargs):
         if clear_leg:
             self.leg = []
+            
+        if ax is None:
+            ax = plt.gca()
             
         length = len(IDs)
         
@@ -123,18 +131,25 @@ class PL_data():
                 if ID in value.keys():
                     color = colors[color_i]
                     data = value[ID]
-                    plt.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,color = color, **kwargs)
+                    line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,color = color, **kwargs)
                     self.leg.append(key + '-' + ID)
                     color_i += 1
-        plt.legend(self.leg)
+        
+        if show_leg:
+            plt.legend(self.leg)
+        
+        return line
         
         
         
     #plots all of the samples                
-    def plot_all(self,*args,clear_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x, 
-                 transform_y = lambda y: y,**kwargs):
+    def plot_all(self,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x, 
+                 transform_y = lambda y: y, ax = None, **kwargs):
         if clear_leg:
             self.leg = []
+            
+        if ax is None:
+            ax = plt.gca()
             
         length = len(self.ids)
         if line_cm == None:
@@ -149,10 +164,14 @@ class PL_data():
             for j, data in enumerate(dates.values()):
                 color = colors[color_i]
                 sub_keys = list(self.dict[keys[i]].keys())
-                plt.plot(transform_x(data[0][slc]),transform_y(data[1][slc]),*args,color = color,**kwargs)
+                line, = ax.plot(transform_x(data[0][slc]),transform_y(data[1][slc]),*args,color = color,**kwargs)
                 self.leg.append(keys[i] + '-' + sub_keys[j])
                 color_i += 1
-        plt.legend(self.leg)
+                
+        if show_leg:
+            ax.legend(self.leg)
+        
+        return line
         
         
         

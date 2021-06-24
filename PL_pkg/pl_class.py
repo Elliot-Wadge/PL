@@ -72,7 +72,7 @@ class PL_data():
     #plots any amount of samples by name
     def plot_sample(self,sample_names,*args,clear_leg = True, **kwargs):
         if clear_leg:
-            leg = []
+            self.leg = []
             
         for key in sample_names:
             ID_sub_dict = self.dict[key]

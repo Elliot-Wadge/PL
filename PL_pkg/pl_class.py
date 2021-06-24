@@ -70,7 +70,8 @@ class PL_data():
     
     
     #plots any amount of samples by name
-    def plot_sample(self,sample_names,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
+    def plot_sample(self,sample_names,*args,clear_leg = True, line_cm = None, slc = slice(None),
+                    transform_x = lambda x: x, transform_y = lambda y: y, **kwargs):
         if clear_leg:
             self.leg = []
         
@@ -91,7 +92,7 @@ class PL_data():
             for sub_key in ID_sub_dict.keys():
                 color = colors[color_i]
                 data = ID_sub_dict[sub_key]
-                plt.plot(data[0][slc], data[1][slc],color = color,*args,**kwargs)
+                plt.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),color = color,*args,**kwargs)
                 self.leg.append(key + '-' + sub_key)
                 color_i += 1
                 
@@ -100,7 +101,8 @@ class PL_data():
         
         
     #plots by id name
-    def plot_id(self,IDs,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
+    def plot_id(self,IDs,*args,clear_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x,
+                transform_y = lambda y: y, **kwargs):
         if clear_leg:
             self.leg = []
             
@@ -121,7 +123,7 @@ class PL_data():
                 if ID in value.keys():
                     color = colors[color_i]
                     data = value[ID]
-                    plt.plot(data[0][slc], data[1][slc],*args,color = color, **kwargs)
+                    plt.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,color = color, **kwargs)
                     self.leg.append(key + '-' + ID)
                     color_i += 1
         plt.legend(self.leg)
@@ -129,7 +131,8 @@ class PL_data():
         
         
     #plots all of the samples                
-    def plot_all(self,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
+    def plot_all(self,*args,clear_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x, 
+                 transform_y = lambda y: y,**kwargs):
         if clear_leg:
             self.leg = []
             
@@ -146,7 +149,7 @@ class PL_data():
             for j, data in enumerate(dates.values()):
                 color = colors[color_i]
                 sub_keys = list(self.dict[keys[i]].keys())
-                plt.plot(data[0][slc],data[1][slc],*args,color = color,**kwargs)
+                plt.plot(transform_x(data[0][slc]),transform_y(data[1][slc]),*args,color = color,**kwargs)
                 self.leg.append(keys[i] + '-' + sub_keys[j])
                 color_i += 1
         plt.legend(self.leg)

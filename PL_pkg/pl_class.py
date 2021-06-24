@@ -70,48 +70,85 @@ class PL_data():
     
     
     #plots any amount of samples by name
-    def plot_sample(self,sample_names,*args,clear_leg = True, **kwargs):
+    def plot_sample(self,sample_names,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
         if clear_leg:
             self.leg = []
+        
+        length = 0
+        for key in sample_names:
+            length += len(list(self.dict[key].values()))
             
+        
+        if line_cm == None:
+            colors = [None]*length
+        else:
+            evenly_spaced_interval = np.linspace(0, 1, length)
+            colors = [line_cm(x) for x in evenly_spaced_interval]
+        
+        color_i = 0    
         for key in sample_names:
             ID_sub_dict = self.dict[key]
             for sub_key in ID_sub_dict.keys():
+                color = colors[color_i]
                 data = ID_sub_dict[sub_key]
-                plt.plot(data[0], data[1],*args,**kwargs)
+                plt.plot(data[0][slc], data[1][slc],color = color,*args,**kwargs)
                 self.leg.append(key + '-' + sub_key)
+                color_i += 1
                 
         plt.legend(self.leg)
         
         
         
     #plots by id name
-    def plot_id(self,IDs,*args,clear_leg = True, **kwargs):
+    def plot_id(self,IDs,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
         if clear_leg:
-            self.leg = []    
+            self.leg = []
+            
+        length = len(IDs)
+        
+        if line_cm == None:
+            colors = [None]*length
+        else:
+            evenly_spaced_interval = np.linspace(0, 1, length)
+            colors = [line_cm(x) for x in evenly_spaced_interval]
+        
+        color_i = 0
         for ID in IDs:
             values = self.dict.values()
             keys = list(self.dict.keys())
             for i,value in enumerate(values):
                 key = keys[i]
                 if ID in value.keys():
+                    color = colors[color_i]
                     data = value[ID]
-                    plt.plot(data[0], data[1],*args, **kwargs)
+                    plt.plot(data[0][slc], data[1][slc],*args,color = color, **kwargs)
                     self.leg.append(key + '-' + ID)
+                    color_i += 1
         plt.legend(self.leg)
         
         
         
     #plots all of the samples                
-    def plot_all(self,*args,clear_leg = True, **kwargs):
+    def plot_all(self,*args,clear_leg = True, line_cm = None, slc = slice(None), **kwargs):
         if clear_leg:
-            self.leg = [] 
+            self.leg = []
+            
+        length = len(self.ids)
+        if line_cm == None:
+            colors = [None]*length
+        else:
+            evenly_spaced_interval = np.linspace(0, 1, length)
+            colors = [line_cm(x) for x in evenly_spaced_interval]
+            
+        color_i = 0  
         for i, dates in enumerate(self.dict.values()):
             keys = list(self.dict.keys())
             for j, data in enumerate(dates.values()):
+                color = colors[color_i]
                 sub_keys = list(self.dict[keys[i]].keys())
-                plt.plot(data[0],data[1],*args,**kwargs)
+                plt.plot(data[0][slc],data[1][slc],*args,color = color,**kwargs)
                 self.leg.append(keys[i] + '-' + sub_keys[j])
+                color_i += 1
         plt.legend(self.leg)
         
         

@@ -11,7 +11,7 @@ setup(
     # Needed for dependencies
     install_requires=['numpy','matplotlib'],
     # *strongly* suggested for sharing
-    version='0.1',
+    version='0.2',
     # The license can be anything you like
     license='E',
     description='PL_class to assist with data analysis',

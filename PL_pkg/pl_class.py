@@ -4,6 +4,7 @@
 # In[ ]:
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import cm
 
 class PL_data():
     
@@ -12,6 +13,7 @@ class PL_data():
         kwargs['unpack'] = True
         self.dict, self.samples, self.ids = self.make_dictionary(filenames,**kwargs)
         self.leg = []
+        
         
     def make_dictionary(self,filenames, **kwargs):
         samples = []#store the individual sample names
@@ -72,6 +74,8 @@ class PL_data():
     #plots any amount of samples by name
     def plot_sample(self,sample_names,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None),
                     transform_x = lambda x: x, transform_y = lambda y: y, ax = None, **kwargs):
+        
+        lines = []
         if clear_leg:
             self.leg = []
             
@@ -89,25 +93,30 @@ class PL_data():
             evenly_spaced_interval = np.linspace(0, 1, length)
             colors = [line_cm(x) for x in evenly_spaced_interval]
         
-        color_i = 0    
+        color_i = 0
         for key in sample_names:
             ID_sub_dict = self.dict[key]
             for sub_key in ID_sub_dict.keys():
                 color = colors[color_i]
                 data = ID_sub_dict[sub_key]
-                line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),color = color,*args,**kwargs)
+                line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,
+                                label = key + '-' + sub_key, color = color,**kwargs)
+                lines.append(line)
                 self.leg.append(key + '-' + sub_key)
                 color_i += 1
         
-        if show_leg:        
-            plt.legend(self.leg)
+        if show_leg:
+            #show the legend
+            ax.legend()
             
-        return line
+        return lines
         
         
     #plots by id name
     def plot_id(self,IDs,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x,
                 transform_y = lambda y: y, ax = None, **kwargs):
+        
+        lines = []
         if clear_leg:
             self.leg = []
             
@@ -131,20 +140,24 @@ class PL_data():
                 if ID in value.keys():
                     color = colors[color_i]
                     data = value[ID]
-                    line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,color = color, **kwargs)
+                    line, = ax.plot(transform_x(data[0][slc]), transform_y(data[1][slc]),*args,
+                                    label = key + '-' + ID, color = color, **kwargs)
+                    lines.append(line)
                     self.leg.append(key + '-' + ID)
                     color_i += 1
         
         if show_leg:
-            plt.legend(self.leg)
+            ax.legend()
         
-        return line
+        return lines
         
         
         
     #plots all of the samples                
     def plot_all(self,*args,clear_leg = True, show_leg = True, line_cm = None, slc = slice(None), transform_x = lambda x: x, 
                  transform_y = lambda y: y, ax = None, **kwargs):
+        
+        lines = []
         if clear_leg:
             self.leg = []
             
@@ -164,16 +177,16 @@ class PL_data():
             for j, data in enumerate(dates.values()):
                 color = colors[color_i]
                 sub_keys = list(self.dict[keys[i]].keys())
-                line, = ax.plot(transform_x(data[0][slc]),transform_y(data[1][slc]),*args,color = color,**kwargs)
+                line, = ax.plot(transform_x(data[0][slc]),transform_y(data[1][slc]),*args,
+                                label = keys[i] + '-' + sub_keys[j], color = color,**kwargs)
+                lines.append(line)
                 self.leg.append(keys[i] + '-' + sub_keys[j])
                 color_i += 1
                 
         if show_leg:
-            ax.legend(self.leg)
+            ax.legend()
         
-        return line
-        
-        
+        return lines
         
     #append a new sample to the dictionary
     def append(self,sample,ID,data):
